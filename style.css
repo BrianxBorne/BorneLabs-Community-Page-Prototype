@@ -1,89 +1,61 @@
-/* Import Orbitron Font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-
 /* Global Styles */
 body {
-    font-family: 'Orbitron', sans-serif; /* Use Orbitron for the entire body */
-    background: linear-gradient(180deg, #000428, #004e92); /* Dark blue gradient background */
-    color: white; /* Set text color to white for contrast */
+    font-family: 'Arial', sans-serif;
+    background-color: black;
+    color: white;
     display: flex;
-    flex-direction: column; /* Align items in a column */
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically */
-    height: 100vh; /* Full height of the viewport */
-    margin: 0; /* Remove default margin */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
 }
 
 /* Headings */
-h1 {
-    font-size: 4em; /* Make the title big */
-    color: #00BFFF; /* A bright blue color for the title */
-    text-align: center; /* Center text */
-    text-shadow: 0 0 20px rgba(0, 191, 255, 0.767), 0 0 30px rgba(0, 191, 255, 0.5); /* Glowing effect */
-}
-
-h2 {
-    color: #00BFFF; /* A bright blue color for subheadings */
-    text-align: center; /* Center text */
-    text-shadow: 0 0 10px rgba(0, 191, 255, 0.7); /* Glowing effect */
+h1, h2 {
+    color: #1E90FF;
+    text-align: center;
 }
 
 /* Authentication Section */
-#auth-section {
-    margin: 20px 0; /* Spacing around the auth section */
-    width: 80%; /* Width of the section */
-    max-width: 400px; /* Maximum width */
+#auth-section, #post-section {
+    background: rgba(30, 144, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
 }
 
 /* Input Fields */
-input[type="email"],
-input[type="password"] {
-    width: 100%; /* Full width */
-    height: 50px; /* Set height to match the button */
-    border: 1px solid #00BFFF; /* Bright blue border */
-    background-color: rgba(50, 50, 50, 0.9); /* Semi-transparent dark background */
-    color: white; /* White text color */
-    padding: 0 10px; /* Horizontal padding inside the input fields */
-    border-radius: 5px; /* Rounded corners */
-    margin-top: 10px; /* Space above the input fields */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
+input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    border: 1px solid #1E90FF;
+    background-color: #2E2E2E;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
 }
 
 /* Buttons */
 button {
-    margin-top: 10px; /* Spacing above the button */
-    height: 50px; /* Set height to match the input fields */
-    background: linear-gradient(90deg, #00BFFF, #1E90FF); /* Bright blue gradient */
-    border: none; /* No border */
-    color: white; /* White text color */
-    padding: 0 20px; /* Padding around the button */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Button font size */
-    transition: background 0.3s, transform 0.3s; /* Smooth background and transform changes */
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.5); /* Glowing effect */
+    margin-top: 10px;
+    background: linear-gradient(90deg, #1E90FF, #00BFFF);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
-    background: linear-gradient(90deg, #1E90FF, #00BFFF); /* Inverse gradient on hover */
-    transform: scale(1.05); /* Slightly scale the button on hover */
+    background: linear-gradient(90deg, #00BFFF, #1E90FF);
 }
 
-/* Post Section */
-#post-section {
-    margin: 20px 0; /* Spacing around the post section */
-    width: 80%; /* Width of the post section */
-    max-width: 600px; /* Maximum width */
-}
-
-/* Textarea */
-textarea {
-    width: 100%; /* Full width */
-    height: 100px; /* Set height */
-    border: 1px solid #00BFFF; /* Bright blue border */
-    background-color: rgba(50, 50, 50, 0.9); /* Semi-transparent dark background for the textarea */
-    color: white; /* White text color */
-    padding: 10px; /* Padding inside the textarea */
-    border-radius: 5px; /* Rounded corners */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
+/* Posts Section */
+.post {
+    background: rgba(30, 144, 255, 0.1);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
 }
