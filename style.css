@@ -19,7 +19,7 @@ h1 {
     font-size: 4em; /* Make the title big */
     color: #00BFFF; /* A bright blue color for the title */
     text-align: center; /* Center text */
-    text-shadow: 0 0 20px rgba(0, 191, 255, 0.7), 0 0 30px rgba(0, 191, 255, 0.5); /* Glowing effect */
+    text-shadow: 0 0 20px rgba(0, 191, 255, 0.767), 0 0 30px rgba(0, 191, 255, 0.5); /* Glowing effect */
 }
 
 h2 {
