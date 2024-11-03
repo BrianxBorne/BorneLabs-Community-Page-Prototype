@@ -3,24 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid Forum - Home</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <title>Grid Forum</title>
+    <style>
+        /* General layout */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #0f0f0f, #1a1a1a); /* Stylish black gradient */
+            color: #f3f3f3;
+        }
+
+        /* Main container for the two-column layout */
+        .container {
+            display: flex;
+            width: 90%; /* Keep this as is for the container */
+            min-width: 90%;
+            max-width: 90%;
+            height: 100vh;
+            margin: 0 auto;
+        }
+
+        .column-1 {
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            height: 100%;
+            margin-right: 20px; /* Optional: space between columns */
+        }
+
+        /* Title section */
+        header {
+            height: 5vh;
+            background-color: #57798b3f;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Post scroll layout */
+        #posts {
+            background: #22222200;
+            border-radius: 5px;
+            padding: 20px;
+            overflow-y: auto;
+            height: 95vh;
+        }
+
+        /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+        #posts::-webkit-scrollbar {
+            display: none; /* Hides the scrollbar */
+        }
+
+        /* Hide scrollbar for Firefox */
+        #posts {
+            scrollbar-width: none; /* Hides the scrollbar in Firefox */
+        }
+
+        #posts h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        /* Individual post layout */
+        .post {
+            background: rgba(26, 25, 25, 0.63), 0.555;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            height: 20%;
+            box-sizing: border-box;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Align items on both sides */
+            margin-bottom: 5px;
+        }
+
+        .username {
+            font-weight: bold;
+            color: #3b7ba5;
+            margin-right: 10px;
+        }
+
+        .post-text {
+            color: #dcdcdc;
+            word-wrap: break-word;
+            max-width: 70%;
+        }
+
+        .post img {
+            align-items: center;
+            height: 30%;
+            width: 90%;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+
+        .delete-icon {
+            cursor: pointer;
+            color: #ff4d4d;
+            font-size: 16px; /* Smaller size for the delete icon */
+        }
+
+        /* Icons layout */
+        .icon-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .icon {
+            cursor: pointer;
+            color: #ccc;
+            font-size: 20px;
+        }
+
+        .icon.like.active {
+            color: #1e90ff;
+        }
+
+        .icon.dislike.active {
+            color: #ff4d4d;
+        }
+
+        .icon.report.active {
+            color: #ff4d4d;
+        }
+
+        /* Column 2 */
+        .column-2 {
+            flex: 40%; /* Set Column 2 to take up 40% of the container */
+            height: 100%;
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        /* Profile section */
+        #profile-section {
+            background: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        #profile-section h2 {
+            margin: 0;
+        }
+
+        .edit-icon {
+            color: #1e90ff;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        /* Create post layout */
+        #post-section {
+            background: #333;
+            padding: 15px;
+            border-radius: 5px;
+            color: white;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .create-post-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 10px;
+        }
+
+        #post-content {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            font-size: 14px;
+            box-sizing: border-box;
+            height: 40px;
+        }
+
+        #submit-post {
+            height: 40px;
+            background-color: #0077b5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0 20px;
+        }
+
+        /* Image preview styling */
+        #image-preview {
+            height: 50%;
+            width: auto;
+            max-width: 80%;
+            object-fit: contain;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        input[type="file"] {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Comment section */
+        .comment-section {
+            display: none;
+            background: #222; /* Uniform black background */
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .comment-container {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            justify-content: space-between;
+        }
+
+        .comment-input {
+            flex: 1;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            height: 30px; /* Match comment button height */
+            margin-right: 10px;
+            max-width: 90%; /* Ensure it doesn't exceed its container */
+        }
+
+        .comment-button {
+            background-color: #0077b5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            height: 30px; /* Match comment input height */
+        }
+
+        .comment-list {
+            margin-top: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            background: #222; /* Uniform black background */
+            border-radius: 5px;
+            padding: 10px;
+            max-width: 90%; /* Ensure it doesn't exceed its container */
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+        }
+
+        .comment {
+            background: transparent; /* No background highlight */
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            display: flex;
+            align-items: center;
+            white-space: normal; /* Ensure text wraps within boundaries */
+        }
+    </style>
 </head>
 <body>
-    <h1>Grid Forum</h1>
-    <div id="post-section">
-        <h2>Create Post</h2>
-        <textarea id="post-content" placeholder="What do you want to say?" required></textarea>
-        <button id="submit-post">Submit Post</button>
+
+<div class="container">
+    <!-- Column 1: Title and Post Feed -->
+    <div class="column-1">
+        <header>
+            <h1>Grid Forum</h1>
+        </header>
+
+        <!-- Post scroll layout -->
+        <div id="posts">
+            <h2>Posts</h2>
+            <div id="post-list">
+                <!-- User-generated posts will appear here -->
+            </div>
+        </div>
     </div>
-    
-    <h2>Jump into the Future!</h2>
-    <div id="posts"></div>
-    <button id="sign-out-btn">Sign Out</button>
-    
-    <script src="script.js"></script>
+
+    <!-- Column 2: Profile and Create Post Section -->
+    <div class="column-2">
+        <!-- Profile section -->
+        <div id="profile-section">
+            <h2>Your Profile</h2>
+            <p class="username">Username</p>
+            <span class="edit-icon" id="edit-username">✏️</span>
+        </div>
+
+        <!-- Create post layout -->
+        <div id="post-section">
+            <h2>Create a Post</h2>
+            <div class="create-post-container">
+                <textarea id="post-content" placeholder="What's on your mind?" required></textarea>
+                <button id="submit-post">Post</button>
+            </div>
+            <input type="file" id="post-image" accept="image/*">
+            <img id="image-preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
+    </div>
+</div>
+
+<script>
+    // Functionality for changing the username
+    document.getElementById('edit-username').addEventListener('click', function () {
+        const newUsername = prompt('Enter your new username:', document.querySelector('.username').textContent);
+        if (newUsername) {
+            document.querySelector('.username').textContent = newUsername;
+        }
+    });
+
+    // Functionality for posting
+    document.getElementById('submit-post').addEventListener('click', function () {
+        const postContent = document.getElementById('post-content').value;
+        const postImage = document.getElementById('post-image').files[0];
+
+        if (!postContent && !postImage) {
+            alert('Please enter some text or select an image.');
+            return;
+        }
+
+        const post = document.createElement('div');
+        post.classList.add('post');
+
+        const postHeader = document.createElement('div');
+        postHeader.classList.add('post-header');
+
+        const username = document.createElement('span');
+        username.classList.add('username');
+        username.textContent = document.querySelector('.username').textContent; // Use the dynamic username
+
+        const deleteButton = document.createElement('span');
+        deleteButton.classList.add('delete-icon');
+        deleteButton.textContent = '🗑️'; // Delete icon
+        deleteButton.title = 'Delete this post'; // Tooltip for delete button
+
+        // Add delete functionality
+        deleteButton.addEventListener('click', function () {
+            post.remove();
+        });
+
+        postHeader.appendChild(username);
+        postHeader.appendChild(deleteButton);
+        post.appendChild(postHeader);
+
+        const postText = document.createElement('div');
+        postText.classList.add('post-text');
+        postText.textContent = postContent;
+
+        post.appendChild(postText);
+
+        if (postImage) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imgElement = document.createElement('img');
+                imgElement.src = e.target.result;
+                post.appendChild(imgElement);
+            };
+            reader.readAsDataURL(postImage);
+        }
+
+        document.getElementById('post-list').appendChild(post);
+
+        // Clear input fields
+        document.getElementById('post-content').value = '';
+        document.getElementById('post-image').value = '';
+        document.getElementById('image-preview').style.display = 'none';
+    });
+
+    document.getElementById('post-image').addEventListener('change', function () {
+        const file = this.files[0];
+        const preview = document.getElementById('image-preview');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+            preview.style.display = 'none';
+        }
+    });
+</script>
+
 </body>
 </html>
