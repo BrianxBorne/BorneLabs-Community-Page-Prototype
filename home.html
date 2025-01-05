@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid Forum</title>
+    <title>BorneLabs | Communities</title></title>
     <style>
-        /* General layout */
+        
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #0f0f0f, #1a1a1a); /* Stylish black gradient */
+            background: linear-gradient(to bottom, #0f0f0f, #1a1a1a); 
             color: #f3f3f3;
         }
 
-        /* Main container for the two-column layout */
+       
         .container {
             display: flex;
-            width: 90%; /* Keep this as is for the container */
+            width: 90%; 
             min-width: 90%;
             max-width: 90%;
             height: 100vh;
@@ -30,7 +30,7 @@
             flex-direction: column;
             width: 60%;
             height: 100%;
-            margin-right: 20px; /* Optional: space between columns */
+            margin-right: 20px; 
         }
 
         /* Title section */
@@ -56,12 +56,12 @@
 
         /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
         #posts::-webkit-scrollbar {
-            display: none; /* Hides the scrollbar */
+            display: none;
         }
 
         /* Hide scrollbar for Firefox */
         #posts {
-            scrollbar-width: none; /* Hides the scrollbar in Firefox */
+            scrollbar-width: none; 
         }
 
         #posts h2 {
@@ -85,7 +85,7 @@
         .post-header {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Align items on both sides */
+            justify-content: space-between; 
             margin-bottom: 5px;
         }
 
@@ -112,7 +112,7 @@
         .delete-icon {
             cursor: pointer;
             color: #ff4d4d;
-            font-size: 16px; /* Smaller size for the delete icon */
+            font-size: 16px; 
         }
 
         /* Icons layout */
@@ -142,7 +142,7 @@
 
         /* Column 2 */
         .column-2 {
-            flex: 40%; /* Set Column 2 to take up 40% of the container */
+            flex: 40%; 
             height: 100%;
             width: 20%;
             display: flex;
@@ -227,7 +227,7 @@
         /* Comment section */
         .comment-section {
             display: none;
-            background: #222; /* Uniform black background */
+            background: #222;
             margin-top: 10px;
             padding: 10px;
             border-radius: 5px;
@@ -248,7 +248,7 @@
             resize: none;
             height: 30px; /* Match comment button height */
             margin-right: 10px;
-            max-width: 90%; /* Ensure it doesn't exceed its container */
+            max-width: 90%; 
         }
 
         .comment-button {
@@ -268,12 +268,12 @@
             background: #222; /* Uniform black background */
             border-radius: 5px;
             padding: 10px;
-            max-width: 90%; /* Ensure it doesn't exceed its container */
-            box-sizing: border-box; /* Ensure padding doesn't affect width */
+            max-width: 90%; 
+            box-sizing: border-box; 
         }
 
         .comment {
-            background: transparent; /* No background highlight */
+            background: transparent;
             padding: 5px;
             border-radius: 5px;
             margin-bottom: 5px;
@@ -281,7 +281,7 @@
             overflow-wrap: break-word;
             display: flex;
             align-items: center;
-            white-space: normal; /* Ensure text wraps within boundaries */
+            white-space: normal;
         }
     </style>
 </head>
@@ -352,14 +352,14 @@
 
         const username = document.createElement('span');
         username.classList.add('username');
-        username.textContent = document.querySelector('.username').textContent; // Use the dynamic username
+        username.textContent = document.querySelector('.username').textContent; 
 
         const deleteButton = document.createElement('span');
         deleteButton.classList.add('delete-icon');
         deleteButton.textContent = '🗑️'; // Delete icon
         deleteButton.title = 'Delete this post'; // Tooltip for delete button
 
-        // Add delete functionality
+        // delete functionality
         deleteButton.addEventListener('click', function () {
             post.remove();
         });
