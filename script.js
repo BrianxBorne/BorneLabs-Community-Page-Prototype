@@ -1,8 +1,8 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDbGA3putZnMhwABVAtvdHu_j6Ve1kFYp8",
     authDomain: "grid-forum.firebaseapp.com",
@@ -13,7 +13,7 @@ const firebaseConfig = {
     appId: "1:491604485212:web:a14449d4ec620b8a823299"
 };
 
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -25,7 +25,7 @@ document.getElementById('sign-in-btn').addEventListener('click', () => {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             console.log("Sign in successful:", userCredential);
-            window.location.href = "home.html"; // Redirect to home page
+            window.location.href = "home.html"; 
         })
         .catch((error) => {
             const errorMessage = error.message;
